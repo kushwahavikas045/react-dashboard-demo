@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { formateName } from '../../utils/formateName';
+import { Avatar, formateName } from '../../utils/formateName';
 import { projectAssigned } from '../../utils/TableData';
 const ProjectTable = () => {
  const [month, setMonth] = useState('january');
@@ -41,7 +41,7 @@ const ProjectTable = () => {
                     <tbody>
                         {data.map((project) =>(
                             <tr key={project.id}>
-                            <td style={{width:"50px"}}><span className="round">{formateName(project.name)}</span></td>
+                            <td style={{width:"50px"}}><span className={`${Avatar(project.name)}`}>{formateName(project.name)}</span></td>
                             <td>
                                 <h6>{project.name}</h6><small className="text-muted">{project.status}</small>
                             </td>
