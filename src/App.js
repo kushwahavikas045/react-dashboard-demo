@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-d
 import Footer from './components/Footer';
 import Loader from './components/Loader';
 
+
 function App() {
 //toggle state
  const[toggle, setToggle] = useState(false);
@@ -27,6 +28,8 @@ const Icons = lazy(() => import("./page/Icons/Icons"));
 const Map = lazy(() => import("./page/Map/Map"));
 const Blank = lazy(() => import("./page/Blank/Blank"));
 const PageNotFound = lazy(() => import("./components/PageNotFound"));
+const DragAndDrop = lazy(() => import("./page/DragAndDrop/DragAndDrop"));
+
   return (
     <Router>
       <div className={`${toggle ? "fix-header fix-sidebar card-no-border mini-sidebar" : "fix-header fix-sidebar card-no-border"}`}>
@@ -57,6 +60,9 @@ const PageNotFound = lazy(() => import("./components/PageNotFound"));
                 </Route>
                 <Route exact path={"/Blank"}>
                  <Blank/>
+                </Route>
+                <Route exact path={"/DragAndDrop"}>
+                 <DragAndDrop/>
                 </Route>
                 <Route exact path={"*"}>
                  <PageNotFound/>

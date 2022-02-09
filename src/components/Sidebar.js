@@ -29,6 +29,9 @@ const Sidebar = () => {
                 <li> <NavLink activeClassName="waves-effect waves-dark active" to="/PageNotFound" aria-expanded="false"><i
                             className="fa fa-question-circle"></i><span className="hide-menu">404</span></NavLink>
                 </li>
+                <li> <NavLink activeClassName="waves-effect waves-dark active" to="/DragAndDrop" aria-expanded="false"><i
+                            className="fa fa-window-restore"></i><span className="hide-menu">DragAndDrop</span></NavLink>
+                </li>
             </ul>
         </nav>
 

@@ -2829,9 +2829,14 @@ textarea {
   resize: none;
 }
 
-/*******************
+/*******************P
 Form-control
 ******************/
+.form-outline hover {
+ color:gray;
+}
+
+
 .form-control {
   color: #67757c;
   min-height: 38px;

@@ -3,7 +3,7 @@ import Breadcumb from '../../components/Breadcumb';
 import { data } from '../../utils/TableData';
 const Tables = () => {
 
-    console.log(data);
+
 
     const Data = data?.map((user) =>(
         <tr key={user.id}>
