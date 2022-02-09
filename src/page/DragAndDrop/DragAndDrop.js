@@ -6,12 +6,17 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Select from '../../components/Select';
 import Container from './Container';
+import Checkbox from '../../components/Checkbox';
+
+import Radio from '../../components/Radio';
 const DragAndDrop = () => {
     const [genrateCode, setGenrateCode] = React.useState("Genrate Your Code:");
     const [element, setElement] = React.useState([
         { name: <Input/> },
         { name: <Button/> },
-        { name: <Select/> }
+        { name: <Select/> },
+        {name: <Checkbox/>},
+        {name: <Radio/> }
     ]);
 
     const [container, setContainer] = React.useState([]);
@@ -46,7 +51,7 @@ const DragAndDrop = () => {
  const handleGenrateCode = () =>{
 
     const code = document.getElementById('code').innerHTML;
-     let staticCode = code ? `<form>${code}</form>` : <p style={{color:'red', fontWeigth:300}}>please Drag some Element</p>
+     let staticCode = code ? `<form>${code}</form>` : <p style={{color:'red', fontWeight:300}}>please Drag some Element</p>
     setGenrateCode(staticCode);
 
  }
