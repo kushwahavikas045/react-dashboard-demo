@@ -2920,6 +2920,13 @@ table th {
   font-weight: 400;
 }
 
+.table-error{
+  font-weight: 700;
+  text-align: center;
+  height: 200px;
+}
+
+
 .daterangepicker td.active,
 .daterangepicker td.active:hover {
   background-color: #20aee3;

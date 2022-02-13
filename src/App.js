@@ -5,6 +5,7 @@ import Sidebar from './components/Sidebar';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import Footer from './components/Footer';
 import Loader from './components/Loader';
+import UpdateProject from './page/project/UpdateProject';
 
 
 function App() {
@@ -39,32 +40,33 @@ const DragAndDrop = lazy(() => import("./page/DragAndDrop/DragAndDrop"));
           <Sidebar />
           <div class="page-wrapper">
             <div class="container-fluid">
+
               <Switch>
-                <Route exact path={"/"}>
+                <Route exact path="/">
                   <Redirect to="/Dashboard"/>
                 </Route>
-                <Route exact path={"/Dashboard"}>
+                <Route exact path="/Dashboard">
                  <Dashboard/>
                 </Route>
-                <Route exact path={"/Profile"}>
+                <Route exact path="/Profile">
                  <Profile/>
                 </Route>
-                <Route exact path={"/Tables"}>
+                <Route exact path="/Tables">
                  <Tables/>
                 </Route>
-                <Route exact path={"/Icons"}>
+                <Route exact path="/Icons">
                  <Icons/>
                 </Route>
-                <Route exact path={"/Map"}>
+                <Route exact path="/Map">
                  <Map/>
                 </Route>
-                <Route exact path={"/Blank"}>
+                <Route exact path="/Blank">
                  <Blank/>
                 </Route>
-                <Route exact path={"/DragAndDrop"}>
+                <Route exact path="/DragAndDrop">
                  <DragAndDrop/>
                 </Route>
-                <Route exact path={"*"}>
+                <Route exact path="*">
                  <PageNotFound/>
                 </Route>
               </Switch>

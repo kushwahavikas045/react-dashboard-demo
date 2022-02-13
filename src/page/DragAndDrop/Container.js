@@ -12,9 +12,7 @@ const Container = ({ code }) => {
     }
   }
 
-  // if(code === 'Genrate Your Code:'){
-  //  return
-  // }
+
   return (
     <>
       <div className="col-lg-4 col-xlg-3 col-md-5" style={{ background: "black", padding: '10px', marginLeft: '20px' }} >

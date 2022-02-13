@@ -1,4 +1,5 @@
 export const formateName = (name) =>{
+ if(!name) return;
   const symbol = name[0].toUpperCase();
   return symbol;
 }
@@ -11,6 +12,7 @@ export const Avatar = (name) => {
      S: 'round round-success',
      N: 'round round-info',
   }
+  if(!name) return;
   const symbol = name[0].toUpperCase();
   let indicate = false;
 

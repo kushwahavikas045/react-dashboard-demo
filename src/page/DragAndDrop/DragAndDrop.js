@@ -49,16 +49,12 @@ const DragAndDrop = () => {
 
  //working on container for code genrate part ------------------>
  const handleGenrateCode = () =>{
-
     const code = document.getElementById('code').innerHTML;
      let staticCode = code ? `<form>${code}</form>` : <p style={{color:'red', fontWeight:300}}>please Drag some Element</p>
     setGenrateCode(staticCode);
-
  }
 
-
-
-    return (
+ return (
         <>
             <Breadcumb
             title="Drag and Drop"
