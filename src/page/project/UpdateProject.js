@@ -1,5 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import { updateProjectById } from '../../http/api';
+import { toast } from 'react-toastify';
 const UpdateProject = ({id, getProject, fetchProject}) => {
   const [months, setMonth] = useState('january');
   const [formdata, setFormData] = useState({
@@ -22,8 +23,9 @@ const UpdateProject = ({id, getProject, fetchProject}) => {
       try {
         const data = await updateProjectById(id, formdata);
         fetchProject();
+        toast.success('project updated');
       } catch (error) {
-        console.log(error);
+        toast.error('something went wrong');
       }
   }
 

@@ -47,6 +47,14 @@
       "status": "nodejs developer",
       "project": "admin wrap backend",
       "rate": "12.8"
+    },
+    {
+      "name": "Mohit panchal",
+      "status": "Nodejs",
+      "project": "webRTC backend",
+      "rate": "16.2",
+      "month": "march",
+      "id": 8
     }
   ]
 }

@@ -5,7 +5,7 @@ import Sidebar from './components/Sidebar';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import Footer from './components/Footer';
 import Loader from './components/Loader';
-import UpdateProject from './page/project/UpdateProject';
+import { ToastContainer } from 'react-toastify';
 
 
 function App() {
@@ -37,6 +37,7 @@ const DragAndDrop = lazy(() => import("./page/DragAndDrop/DragAndDrop"));
        <Suspense fallback={<Loader/>}>
         <div className="main-wrapper">
           <Navbar toggle = {toggleFunction} />
+          <ToastContainer/>
           <Sidebar />
           <div class="page-wrapper">
             <div class="container-fluid">

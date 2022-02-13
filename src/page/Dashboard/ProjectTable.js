@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TableError from '../../components/TableError';
 import { Avatar, formateName } from '../../utils/formateName';
 import { deleteProject } from '../../http/api';
+import { toast } from 'react-toastify'
 const ProjectTable = ({ error, loading, project, fetchProject, update }) => {
     const [month, setMonth] = useState('january');
 
@@ -18,6 +19,7 @@ const ProjectTable = ({ error, loading, project, fetchProject, update }) => {
         const result = window.confirm("Sure you went to Delete?");
         if (result) {
            await deleteProject(id);
+           toast.success('sucessfully delete your project');
             fetchProject();
         }
     }

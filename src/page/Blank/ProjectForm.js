@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { createProject } from '../../http/api';
+import { toast } from 'react-toastify';
+
 const ProjectForm = ({fetchProject}) => {
     const [months, setMonth] = useState('january');
     const [formdata, setFormData] = useState({
@@ -21,9 +23,10 @@ const ProjectForm = ({fetchProject}) => {
         formdata['month'] = months;
         try {
              await createProject(formdata);
-            fetchProject();
+             fetchProject();
+             toast.success('project is created!');
         } catch (error) {
-            console.log(error);
+            toast.error('something went wrong');
         }
         finally{
             setLoading(false);
@@ -91,7 +94,7 @@ const ProjectForm = ({fetchProject}) => {
         </div>
         <div className="form-group">
           <div className="col-sm-12">
-            <button className="btn btn-success" onClick={handleSubmit}>{loading ? 'Created' : 'Create Project'}</button>
+            <button className="btn btn-success" onClick={handleSubmit}>{loading ? 'Creating...' : 'Create Project'}</button>
           </div>
         </div>
                     </div>
