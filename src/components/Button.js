@@ -2,7 +2,10 @@ import React from 'react';
 
 const Button = () => {
   return (
-    <button type="submit" className="btn btn-primary">Submit</button>
+    <div className="form-outline">
+      <input type="submit" className="btn btn-primary" value="submit" />
+    </div>
+
   );
 };
 

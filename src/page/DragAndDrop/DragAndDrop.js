@@ -8,19 +8,19 @@ import Select from '../../components/Select';
 import Container from './Container';
 import Checkbox from '../../components/Checkbox';
 
-import Radio from '../../components/Radio';
 const DragAndDrop = () => {
+    const [jsonArray, setJsonArray] =  React.useState([]);
+    const[elementType, setElementType] = React.useState({});
     const [genrateCode, setGenrateCode] = React.useState("Genrate Your Code:");
     const [element, setElement] = React.useState([
         { name: <Input/> },
         { name: <Button/> },
         { name: <Select/> },
         {name: <Checkbox/>},
-        {name: <Radio/> }
     ]);
-
     const [container, setContainer] = React.useState([]);
 
+    //logic for jsonObject
 
     //setp 1
 
@@ -39,15 +39,22 @@ const DragAndDrop = () => {
  //move to another container
  const movePlayerToTeam = (item) =>{
   setContainer((prev) => [...prev, item]);
-
+  let object = {
+      ...item.name.type().props.children.props,
+      id:Math.floor(1000 + Math.random() * 9000)
+  }
+  setElementType(object);
+  setJsonArray((prev) => [...prev, object]);
  }
+const result = JSON.stringify(jsonArray);
+console.log(result);
 
- //remove from another container
+//remove from another container
  const removePlayerFromTeam = (item) =>{
     setContainer((prev) => prev.filter((_, i) => item.index !== i));
  }
 
- //working on container for code genrate part ------------------>
+//working on container for code genrate part ------------------>
  const handleGenrateCode = () =>{
     const code = document.getElementById('code').innerHTML;
      let staticCode = code ? `<form>${code}</form>` : <p style={{color:'red', fontWeight:300}}>please Drag some Element</p>

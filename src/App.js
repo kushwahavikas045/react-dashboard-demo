@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-d
 import Footer from './components/Footer';
 import Loader from './components/Loader';
 import { ToastContainer } from 'react-toastify';
+import JsonForm from './components/Element/JsonForm';
 
 
 function App() {
@@ -66,6 +67,9 @@ const DragAndDrop = lazy(() => import("./page/DragAndDrop/DragAndDrop"));
                 </Route>
                 <Route exact path="/DragAndDrop">
                  <DragAndDrop/>
+                </Route>
+                <Route exact path="/form">
+                 <JsonForm/>
                 </Route>
                 <Route exact path="*">
                  <PageNotFound/>
