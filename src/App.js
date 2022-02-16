@@ -102,7 +102,7 @@ const isAuth = true;
 
 //protected route
 const ProtectedRoute = ({ children, ...rest }) => {
-  const isAuth = false;
+  const isAuth = true;
   return (
       <Route
           {...rest}
