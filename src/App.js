@@ -31,8 +31,12 @@ const Map = lazy(() => import("./page/Map/Map"));
 const Blank = lazy(() => import("./page/Blank/Blank"));
 const PageNotFound = lazy(() => import("./components/PageNotFound"));
 const DragAndDrop = lazy(() => import("./page/DragAndDrop/DragAndDrop"));
+const Login = lazy(() => import('./page/Login/Login'));
 
-  return (
+const isAuth = true;
+
+
+  return isAuth ? (
     <Router>
       <div className={`${toggle ? "fix-header fix-sidebar card-no-border mini-sidebar" : "fix-header fix-sidebar card-no-border"}`}>
        <Suspense fallback={<Loader/>}>
@@ -44,36 +48,36 @@ const DragAndDrop = lazy(() => import("./page/DragAndDrop/DragAndDrop"));
             <div class="container-fluid">
 
               <Switch>
-                <Route exact path="/">
+                <ProtectedRoute exact path="/">
                   <Redirect to="/Dashboard"/>
-                </Route>
-                <Route exact path="/Dashboard">
+                </ProtectedRoute>
+                <ProtectedRoute exact path="/Dashboard">
                  <Dashboard/>
-                </Route>
-                <Route exact path="/Profile">
+                </ProtectedRoute>
+                <ProtectedRoute exact path="/Profile">
                  <Profile/>
-                </Route>
-                <Route exact path="/Tables">
+                </ProtectedRoute>
+                <ProtectedRoute exact path="/Tables">
                  <Tables/>
-                </Route>
-                <Route exact path="/Icons">
+                </ProtectedRoute>
+                <ProtectedRoute exact path="/Icons">
                  <Icons/>
-                </Route>
-                <Route exact path="/Map">
+                </ProtectedRoute>
+                <ProtectedRoute exact path="/Map">
                  <Map/>
-                </Route>
-                <Route exact path="/Blank">
+                </ProtectedRoute>
+                <ProtectedRoute exact path="/Blank">
                  <Blank/>
-                </Route>
-                <Route exact path="/DragAndDrop">
+                </ProtectedRoute>
+                <ProtectedRoute exact path="/DragAndDrop">
                  <DragAndDrop/>
-                </Route>
-                <Route exact path="/form">
+                </ProtectedRoute>
+                <ProtectedRoute exact path="/form">
                  <JsonForm/>
-                </Route>
-                <Route exact path="*">
+                </ProtectedRoute>
+                <ProtectedRoute exact path="*">
                  <PageNotFound/>
-                </Route>
+                </ProtectedRoute>
               </Switch>
             </div>
             <Footer/>
@@ -83,7 +87,39 @@ const DragAndDrop = lazy(() => import("./page/DragAndDrop/DragAndDrop"));
         </Suspense>
       </div>
     </Router>
-  );
+  ) : (
+    <Router>
+      <Suspense fallback={<Loader/>}>
+        <Route exact path='/signup'>
+          <Login/>
+        </Route>
+          <Login/>
+
+      </Suspense>
+    </Router>
+  )
 }
+
+//protected route
+const ProtectedRoute = ({ children, ...rest }) => {
+  const isAuth = false;
+  return (
+      <Route
+          {...rest}
+          render={({ location }) => {
+              return isAuth ? (
+                  children
+              ) : (
+                <Redirect
+                to={{
+                    pathname: '/login',
+                    state: { from: location },
+                }}
+            />
+              );
+          }}
+      ></Route>
+  );
+};
 
 export default App;

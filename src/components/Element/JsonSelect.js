@@ -9,7 +9,6 @@ const JsonSelect = ({label, id, className, option}) => {
             <select className="form-select" aria-label="Default select example"
                 onChange={event => handleChange(id, event)}
             >
-                <option >Open this select menu</option>
                 {option.length > 0 && option.map((option, i) =>
                     <option value={option.props.value ? option.props.value : option.props.children} key={i}>{option.props.children}</option>
 

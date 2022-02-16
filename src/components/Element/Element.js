@@ -1,4 +1,5 @@
 import React from 'react'
+import JsonButton from './JsonButton';
 import JsonInput from './JsonInput';
 import JsonSelect from './JsonSelect';
 const Element = ({field:{
@@ -6,6 +7,8 @@ const Element = ({field:{
     type,
     className,
     placeholder,
+    label,
+    name,
     value,
     children
 }}) => {
@@ -15,7 +18,9 @@ const Element = ({field:{
             return (
             <JsonInput
             id={id}
-            label = {placeholder}
+            label = {label}
+            placeholder = {placeholder}
+            name={name}
             className = {className}
             value = {value}
             />)
@@ -31,10 +36,10 @@ const Element = ({field:{
             )
         case 'submit':
             return (
-                <JsonInput
+                <JsonButton
                 id = {id}
-                className = {className}
-                value = {value}
+                type={type}
+
                 />
             )
         default:

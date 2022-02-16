@@ -1,8 +1,11 @@
-import React from 'react'
+import React,{useContext} from 'react';
+import { FormContext } from '../Formcontext';
 
-const JsonButton = () => {
+const JsonButton = ({id, type,}) => {
+
+  const {handleSubmit}  = useContext(FormContext);
   return (
-    <div>JsonButton</div>
+    <button type={type} id={id} className="btn btn-primary" onClick={(e) => handleSubmit(e)}>Submit</button>
   )
 }
 

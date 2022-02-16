@@ -1,16 +1,11 @@
-{
+[
+  {
+    "page_label": "Json form genrated",
     "fields":
     [
-        { "type": "text", "className": "form-control", "placeholder": "input", "id": 8049 },
-        { "type": "select", "className": "form-select", "aria-label": "Default select example",
-        "style": { "cursor": "pointer" },
-         "children": [{ "type": "option", "key": null, "ref": null,
-            "props": { "selected": true, "children": "Open this select menu" },
-            "_owner": null, "_store": {} },
-         { "type": "option", "key": null, "ref": null, "props": { "value": "1", "children": "One" }, "_owner": null, "_store": {} },
-         { "type": "option", "key": null, "ref": null, "props": { "value": "2", "children": "Two" }, "_owner": null, "_store": {} },
-         { "type": "option", "key": null, "ref": null, "props": { "value": "3", "children": "Three" }, "_owner": null, "_store": {} }],
-         "id": 1489 },
-         { "type": "submit", "className": "btn btn-primary", "value": "submit", "id": 1090 }
-       ]
+      {"type":"text","className":"form-control","name":"FirstName","placeholder":"Enter FirstName","id":2688,"label":"FirstName", "value":""},
+      {"type":"text","className":"form-control","name":"LastName","placeholder":"Enter LastName","id":6934,"label":"LastName", "value":""},
+      {"type":"submit","className":"btn btn-primary","value":"submit","id":2562,"name":"LastName","placeholder":"Enter LastName","label":"LastName"}
+    ]
 }
+]

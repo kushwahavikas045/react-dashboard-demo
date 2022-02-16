@@ -2,9 +2,14 @@ import React from 'react';
 
 const Checkbox = () => {
   return (
-    <div class="form-group" style={{border:'1px solid black', }}>checkbox
-    <input type="checkbox" class="form-check-input" />
-  </div>
+    <>
+   <div class="form-check">
+  <input type="checkbox" value=""/>
+  <label>
+    Default checkbox
+  </label>
+</div>
+</>
   );
 };
 

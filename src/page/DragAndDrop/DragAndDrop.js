@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, { useCallback }  from 'react';
 import Breadcumb from '../../components/Breadcumb';
 import Element from './Element';
 import { useDrop } from 'react-dnd';
@@ -11,6 +11,7 @@ import Checkbox from '../../components/Checkbox';
 const DragAndDrop = () => {
     const [jsonArray, setJsonArray] =  React.useState([]);
     const[elementType, setElementType] = React.useState({});
+    const[elementData, setElementData] = React.useState(null);
     const [genrateCode, setGenrateCode] = React.useState("Genrate Your Code:");
     const [element, setElement] = React.useState([
         { name: <Input/> },
@@ -41,7 +42,11 @@ const DragAndDrop = () => {
   setContainer((prev) => [...prev, item]);
   let object = {
       ...item.name.type().props.children.props,
-      id:Math.floor(1000 + Math.random() * 9000)
+      id:Math.floor(1000 + Math.random() * 9000),
+      name:elementData.name ? elementData.name : item.name.type().props.children.props.name,
+      placeholder: elementData.placeholder ? elementData.placeholder : item.name.type().props.children.props.placeholder,
+      label: elementData.label ? elementData.label : item.name.type().porps.children.props.name,
+      type: item.name.type().props.children.props.class === 'form-check' ? 'checkbox' : item.name.type().props.children.props.type,
   }
   setElementType(object);
   setJsonArray((prev) => [...prev, object]);
@@ -60,6 +65,16 @@ console.log(result);
      let staticCode = code ? `<form>${code}</form>` : <p style={{color:'red', fontWeight:300}}>please Drag some Element</p>
     setGenrateCode(staticCode);
  }
+
+//input data
+const handleElementData = useCallback((item, setFormData) =>{
+    setElementData(item);
+  setFormData({
+    name:'',
+    label:'',
+    placeholder:''
+  });
+},[]);
 
  return (
         <>
@@ -94,7 +109,7 @@ console.log(result);
                        />
                    ))}
                 </div>
-                <Container code = {genrateCode}/>
+                <Container code = {genrateCode} handleElementData = {handleElementData}/>
 
             </div>
         </>

@@ -6,11 +6,12 @@ const JsonForm = () => {
     const [elements, setElements] = useState(null);
 
     useEffect(() => {
-        setElements(formJson)
+        setElements(formJson[0])
 
       }, [])
 
-      const { fields } = elements ?? {}
+      const { fields, page_label } = elements ?? {}
+
       const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -20,8 +21,8 @@ const JsonForm = () => {
       const handleChange = (id, event) => {
         const newElements = { ...elements }
         newElements.fields.forEach(field => {
-          const { type, id } = field;
-          if (id === id) {
+          const { type, name:fieldId , value} = field;
+          if (id === fieldId) {
             switch (type) {
               case 'checkbox':
                 field['value'] = event.target.checked;
@@ -36,15 +37,15 @@ const JsonForm = () => {
           }
           setElements(newElements)
         });
-        console.log(elements)
+        // console.log(elements)
       }
   return (
-    <FormContext.Provider value={{ handleChange }}>
+    <FormContext.Provider value={{ handleChange, handleSubmit }}>
     <div className="App container">
-      <h3>Genrated form by json</h3>
+      <h3>{page_label}</h3>
       <form>
         {fields ? fields.map((field, i) => <Element key={i} field={field} />) : null}
-        <button type="submit" className="btn btn-primary" onClick={(e) => handleSubmit(e)}>Submit</button>
+        {/* <button type="submit" className="btn btn-primary" onClick={(e) => handleSubmit(e)}>Submit</button> */}
       </form>
 
     </div>
