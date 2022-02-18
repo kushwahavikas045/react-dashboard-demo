@@ -1,4 +1,4 @@
-import { useCallback, useState, lazy, Suspense } from 'react';
+import { useCallback, useState, lazy, Suspense, useContext } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
@@ -7,93 +7,95 @@ import Footer from './components/Footer';
 import Loader from './components/Loader';
 import { ToastContainer } from 'react-toastify';
 import JsonForm from './components/Element/JsonForm';
-
+import Signup from './page/Login/Signup';
+import AuthContext from './store/auth';
 
 function App() {
-//toggle state
- const[toggle, setToggle] = useState(false);
+  //toggle state
+  const [toggle, setToggle] = useState(false);
 
- //toggle function
- const toggleFunction = useCallback((data) =>{
-   if(data === "true"){
-     setToggle(!toggle);
-   }else{
-     setToggle(toggle);
-   }
- },[toggle]);
+  //toggle function
+  const toggleFunction = useCallback((data) => {
+    if (data === "true") {
+      setToggle(!toggle);
+    } else {
+      setToggle(toggle);
+    }
+  }, [toggle]);
 
-//lazy loading
-const Dashboard = lazy(() => import("./page/Dashboard/Dashboard"));
-const Profile = lazy(() => import("./page/Profile/Profile"));
-const Tables = lazy(() => import("./page/Tables/Tables"));
-const Icons = lazy(() => import("./page/Icons/Icons"));
-const Map = lazy(() => import("./page/Map/Map"));
-const Blank = lazy(() => import("./page/Blank/Blank"));
-const PageNotFound = lazy(() => import("./components/PageNotFound"));
-const DragAndDrop = lazy(() => import("./page/DragAndDrop/DragAndDrop"));
-const Login = lazy(() => import('./page/Login/Login'));
+  //lazy loading
+  const Dashboard = lazy(() => import("./page/Dashboard/Dashboard"));
+  const Profile = lazy(() => import("./page/Profile/Profile"));
+  const Tables = lazy(() => import("./page/Tables/Tables"));
+  const Icons = lazy(() => import("./page/Icons/Icons"));
+  const Map = lazy(() => import("./page/Map/Map"));
+  const Blank = lazy(() => import("./page/Blank/Blank"));
+  const PageNotFound = lazy(() => import("./components/PageNotFound"));
+  const DragAndDrop = lazy(() => import("./page/DragAndDrop/DragAndDrop"));
+  const Login = lazy(() => import('./page/Login/Login'));
 
-const isAuth = true;
-
+  const authCtx = useContext(AuthContext);
+  const{ isAuth } = authCtx;
 
   return isAuth ? (
     <Router>
       <div className={`${toggle ? "fix-header fix-sidebar card-no-border mini-sidebar" : "fix-header fix-sidebar card-no-border"}`}>
-       <Suspense fallback={<Loader/>}>
-        <div className="main-wrapper">
-          <Navbar toggle = {toggleFunction} />
-          <ToastContainer/>
-          <Sidebar />
-          <div class="page-wrapper">
-            <div class="container-fluid">
-
-              <Switch>
-                <ProtectedRoute exact path="/">
-                  <Redirect to="/Dashboard"/>
-                </ProtectedRoute>
-                <ProtectedRoute exact path="/Dashboard">
-                 <Dashboard/>
-                </ProtectedRoute>
-                <ProtectedRoute exact path="/Profile">
-                 <Profile/>
-                </ProtectedRoute>
-                <ProtectedRoute exact path="/Tables">
-                 <Tables/>
-                </ProtectedRoute>
-                <ProtectedRoute exact path="/Icons">
-                 <Icons/>
-                </ProtectedRoute>
-                <ProtectedRoute exact path="/Map">
-                 <Map/>
-                </ProtectedRoute>
-                <ProtectedRoute exact path="/Blank">
-                 <Blank/>
-                </ProtectedRoute>
-                <ProtectedRoute exact path="/DragAndDrop">
-                 <DragAndDrop/>
-                </ProtectedRoute>
-                <ProtectedRoute exact path="/form">
-                 <JsonForm/>
-                </ProtectedRoute>
-                <ProtectedRoute exact path="*">
-                 <PageNotFound/>
-                </ProtectedRoute>
-              </Switch>
+        <Suspense fallback={<Loader />}>
+          <div className="main-wrapper">
+            <Navbar toggle={toggleFunction} />
+            <ToastContainer />
+            <Sidebar />
+            <div class="page-wrapper">
+              <div class="container-fluid">
+                <Switch>
+                  <ProtectedRoute exact path="/">
+                    <Redirect to="/Dashboard" />
+                  </ProtectedRoute>
+                  <ProtectedRoute exact path="/Dashboard">
+                    <Dashboard />
+                  </ProtectedRoute>
+                  <ProtectedRoute exact path="/Profile">
+                    <Profile />
+                  </ProtectedRoute>
+                  <ProtectedRoute exact path="/Tables">
+                    <Tables />
+                  </ProtectedRoute>
+                  <ProtectedRoute exact path="/Icons">
+                    <Icons />
+                  </ProtectedRoute>
+                  <ProtectedRoute exact path="/Map">
+                    <Map />
+                  </ProtectedRoute>
+                  <ProtectedRoute exact path="/Blank">
+                    <Blank />
+                  </ProtectedRoute>
+                  <ProtectedRoute exact path="/DragAndDrop">
+                    <DragAndDrop />
+                  </ProtectedRoute>
+                  <ProtectedRoute exact path="/form">
+                    <JsonForm />
+                  </ProtectedRoute>
+                  <ProtectedRoute exact path="*">
+                    <PageNotFound />
+                  </ProtectedRoute>
+                </Switch>
+              </div>
+              <Footer />
             </div>
-            <Footer/>
-          </div>
 
-        </div>
+          </div>
         </Suspense>
       </div>
     </Router>
   ) : (
     <Router>
-      <Suspense fallback={<Loader/>}>
-        <Route exact path='/signup'>
-          <Login/>
-        </Route>
-          <Login/>
+      <Suspense fallback={<Loader />}>
+        <Switch>
+          <Route exact path="/signup">
+            <Signup />
+          </Route>
+        <Login/>
+        </Switch>
 
       </Suspense>
     </Router>
@@ -102,23 +104,25 @@ const isAuth = true;
 
 //protected route
 const ProtectedRoute = ({ children, ...rest }) => {
-  const isAuth = true;
+  const authCtx = useContext(AuthContext);
+  const{ isAuth } = authCtx;
+
   return (
-      <Route
-          {...rest}
-          render={({ location }) => {
-              return isAuth ? (
-                  children
-              ) : (
-                <Redirect
-                to={{
-                    pathname: '/login',
-                    state: { from: location },
-                }}
-            />
-              );
-          }}
-      ></Route>
+    <Route
+      {...rest}
+      render={({ location }) => {
+        return isAuth ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/login',
+              state: { from: location },
+            }}
+          />
+        );
+      }}
+    ></Route>
   );
 };
 

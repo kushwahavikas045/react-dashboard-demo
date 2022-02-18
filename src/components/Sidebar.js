@@ -1,6 +1,16 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React,{useContext} from 'react';
+import { NavLink, useHistory } from 'react-router-dom';
+import AuthContext from '../store/auth';
 const Sidebar = () => {
+    const history = useHistory();
+    const authCtx = useContext(AuthContext);
+
+    //logout
+    const logoutHandler = () =>{
+        authCtx.logout();
+        history.push('/');
+    }
+
   return (
  <aside className="left-sidebar">
 
@@ -34,6 +44,13 @@ const Sidebar = () => {
                 </li>
             </ul>
         </nav>
+
+        <div class="col-md-7 align-self-center">
+                        <button
+                         onClick={logoutHandler}
+                            className="btn waves-effect waves-light btn btn-danger pull-right hidden-sm-down text-white">
+                            Logout</button>
+                    </div>
 
     </div>
 
