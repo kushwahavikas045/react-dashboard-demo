@@ -1,6 +1,8 @@
 import { useRef, useState, useContext } from 'react';
 import { Link, useHistory} from 'react-router-dom';
 import AuthContext from '../../store/auth';
+import { authLogin } from '../../utils/authLogin';
+const signupUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB6sCdPzP3fTWeTOOLmgK-P3h7bgBEGVFI';
 
 const Signup = () => {
     //state
@@ -30,32 +32,7 @@ const Signup = () => {
             return
         }
 
-
-        //auth api (firebase)
-        const res = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB6sCdPzP3fTWeTOOLmgK-P3h7bgBEGVFI', {
-            method: 'POST',
-            body: JSON.stringify({
-                email: email,
-                password: confirm,
-                returnSecureToken: true,
-
-            }),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        if (res.ok) {
-            res.json().then(data => authCtx.login(data.idToken));
-            history.replace('/Dashboard');
-            setLoading(false);
-        } else {
-            return res.json().then((data) => {
-                setFieldError('Authentication failed!');
-                setLoading(false);
-            })
-        }
-
-
+        await authLogin(signupUrl, email, password, authCtx, history, setLoading, setFieldError);
     }
 
     return (
@@ -92,7 +69,7 @@ const Signup = () => {
                         <div className="d-grid mb-4">
                             <button type="submit" className="btn uf-btn-primary btn-lg">{loading ? 'Loading...' : 'Sign up'}</button>
                         </div>
-                        {/* <div className="d-flex mb-3">
+                        <div className="d-flex mb-3">
             <div className="dropdown-divider m-auto w-25"></div>
             <small className="text-nowrap text-white">Or login with</small>
             <div className="dropdown-divider m-auto w-25"></div>
@@ -101,7 +78,7 @@ const Signup = () => {
           <a href="#" className="uf-social-ic" title="Login with Facebook"><i className="fab fa-facebook-f"></i></a>
           <a href="#" className="uf-social-ic" title="Login with Twitter"><i className="fab fa-twitter"></i></a>
           <a href="#" className="uf-social-ic" title="Login with Google"><i className="fab fa-google"></i></a>
-        </div>  */}
+        </div>
                         <div className="mt-4 text-center">
                             <span className="text-white">You have an account?</span>
                             <Link to="/login">login</Link>
