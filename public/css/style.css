@@ -3222,7 +3222,7 @@ This is for the checkbox radio button and switch
 /* Checkboxes
    ========================================================================== */
 /* CUSTOM CSS CHECKBOXES */
-form p {
+/* form p {
   margin-bottom: 10px;
   text-align: left;
 }
@@ -3419,7 +3419,7 @@ form p:last-child {
 [type=checkbox].filled-in:disabled:checked + label:after {
   background-color: #BDBDBD;
   border-color: #BDBDBD;
-}
+} */
 
 /* Switch
    ========================================================================== */
