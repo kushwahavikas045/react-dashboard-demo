@@ -3,7 +3,7 @@ import React from 'react';
 const Checkbox = () => {
   return (
     <>
-   <div class="form-check">
+   <div className="form-check">
   <input type="checkbox" value=""/>
   <label>
     Default checkbox

@@ -10,8 +10,8 @@ const Visitor = () => {
                 <h5 className="card-title mb-0 align-self-center">Our Visitors</h5>
                 <div className="ms-auto">
                     <select className="form-select b-0">
-                        <option selected="">Today</option>
-                        <option value="1">Tomorrow</option>
+                        <option value="today">Today</option>
+                        <option value="tomorrow">Tomorrow</option>
                     </select>
                 </div>
             </div>

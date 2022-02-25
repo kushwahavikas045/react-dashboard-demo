@@ -15,7 +15,7 @@ const ProfileForm = () => {
                     </div>
                 </div>
                 <div className="form-group">
-                    <label for="example-email" className="col-md-12">Email</label>
+                    <label className="col-md-12">Email</label>
                     <div className="col-md-12">
                         <input type="email" placeholder="johnathan@admin.com"
                             className="form-control form-control-line" name="example-email"
@@ -45,7 +45,7 @@ const ProfileForm = () => {
                 <div className="form-group">
                     <label className="col-sm-12">Select Country</label>
                     <div className="col-sm-12">
-                        <select  className="form-control form-control-line">
+                        <select  className="form-control form-control-line" Value={"london"}>
                             <option>London</option>
                             <option>India</option>
                             <option>Usa</option>

@@ -1,11 +1,11 @@
 import React from 'react'
 
-const ProjectNumber = ({count, loading}) => {
+const ProjectNumber = ({count, loading, error}) => {
     return (
         <div className="col-lg-4 col-xlg-3 col-md-5">
             <div className="card">
                 <div className="card-body">
-                       {!loading &&
+                       {!loading && !error &&
                        <>
                         <h4 className="card-title mt-2">January ({count.january})</h4>
                         <h4 className="card-title mt-2">February ({count.february})</h4>
@@ -15,6 +15,7 @@ const ProjectNumber = ({count, loading}) => {
                        {loading &&
                         <h4 className="card-title mt-2" style={{textAlign:'center', marginTop:'5%'}}>Loading...</h4>
                        }
+                       {!loading && error && <h6 className='mt-2'>Server error, try later...</h6>}
 
                 </div>
             </div>

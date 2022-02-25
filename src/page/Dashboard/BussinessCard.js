@@ -37,9 +37,9 @@ const BussinessCard = ({ getProject, fetchProject}) => {
 
     const Card = (
         <>
-        <img src="https://www.shbfinancialservices.com/images/nodatafound.png" class="card-img-top" alt="Sunset Over the Sea"/>
-  <div class="card-body">
-    <p class="card-text text-center">Click On Project Assigned For Details Description</p>
+        <img src="https://www.shbfinancialservices.com/images/nodatafound.png" className="card-img-top" alt="Sunset Over the Sea"/>
+  <div className="card-body">
+    <p className="card-text text-center">Click On Project Assigned For Details Description</p>
   </div>
   </>
     )

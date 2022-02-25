@@ -13,7 +13,6 @@ import AuthContext from './store/auth';
 function App() {
   //toggle state
   const [toggle, setToggle] = useState(false);
-
   //toggle function
   const toggleFunction = useCallback((data) => {
     if (data === "true") {
@@ -22,7 +21,6 @@ function App() {
       setToggle(toggle);
     }
   }, [toggle]);
-
   //lazy loading
   const Dashboard = lazy(() => import("./page/Dashboard/Dashboard"));
   const Profile = lazy(() => import("./page/Profile/Profile"));
@@ -33,9 +31,8 @@ function App() {
   const PageNotFound = lazy(() => import("./components/PageNotFound"));
   const DragAndDrop = lazy(() => import("./page/DragAndDrop/DragAndDrop"));
   const Login = lazy(() => import('./page/Login/Login'));
-
   const authCtx = useContext(AuthContext);
-  const{ isAuth } = authCtx;
+  const { isAuth } = authCtx;
 
   return isAuth ? (
     <Router>
@@ -45,8 +42,8 @@ function App() {
             <Navbar toggle={toggleFunction} />
             <ToastContainer />
             <Sidebar />
-            <div class="page-wrapper">
-              <div class="container-fluid">
+            <div className="page-wrapper">
+              <div className="container-fluid">
                 <Switch>
                   <ProtectedRoute exact path="/">
                     <Redirect to="/Dashboard" />
@@ -57,9 +54,9 @@ function App() {
                   <ProtectedRoute exact path="/Profile">
                     <Profile />
                   </ProtectedRoute>
-                  <ProtectedRoute exact path="/Tables">
+                  <ActivatedRoute exact path="/Tables">
                     <Tables />
-                  </ProtectedRoute>
+                  </ActivatedRoute>
                   <ProtectedRoute exact path="/Icons">
                     <Icons />
                   </ProtectedRoute>
@@ -82,7 +79,6 @@ function App() {
               </div>
               <Footer />
             </div>
-
           </div>
         </Suspense>
       </div>
@@ -94,7 +90,7 @@ function App() {
           <Route exact path="/signup">
             <Signup />
           </Route>
-        <Login/>
+          <Login />
         </Switch>
 
       </Suspense>
@@ -105,7 +101,7 @@ function App() {
 //protected route
 const ProtectedRoute = ({ children, ...rest }) => {
   const authCtx = useContext(AuthContext);
-  const{ isAuth } = authCtx;
+  const { isAuth } = authCtx;
 
   return (
     <Route
@@ -125,5 +121,37 @@ const ProtectedRoute = ({ children, ...rest }) => {
     ></Route>
   );
 };
+
+const ActivatedRoute = ({ children, ...rest }) => {
+  const authCtx = useContext(AuthContext);
+  const { isAuth } = authCtx;
+  const activated = false;
+  return (
+    <Route
+      {...rest}
+      render={({ location }) => {
+        return !isAuth ? (
+          <Redirect
+            to={{
+              pathname: '/',
+              state: { from: location },
+            }}
+          />
+        ) : isAuth && !activated ? (
+          <Redirect
+            to={{
+              pathname: '/Dashboard',
+              state: { from: location },
+            }}
+          />
+        ) : (
+          children
+        );
+      }}
+    ></Route>
+
+  )
+
+}
 
 export default App;

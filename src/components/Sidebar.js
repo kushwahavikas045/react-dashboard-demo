@@ -45,7 +45,7 @@ const Sidebar = () => {
             </ul>
         </nav>
 
-        <div class="col-md-7 align-self-center">
+        <div className="col-md-7 align-self-center">
                         <button
                          onClick={logoutHandler}
                             className="btn waves-effect waves-light btn btn-danger pull-right hidden-sm-down text-white">

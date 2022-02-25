@@ -46,7 +46,7 @@ const DragAndDrop = () => {
       name:elementData.name ? elementData.name : item.name.type().props.children.props.name,
       placeholder: elementData.placeholder ? elementData.placeholder : item.name.type().props.children.props.placeholder,
       label: elementData.label ? elementData.label : item.name.type().porps.children.props.name,
-      type: item.name.type().props.children.props.class === 'form-check' ? 'checkbox' : item.name.type().props.children.props.type,
+      type: item.name.type().props.children.props.className === 'form-check' ? 'checkbox' : item.name.type().props.children.props.type,
   }
   setElementType(object);
   setJsonArray((prev) => [...prev, object]);
@@ -85,6 +85,7 @@ const handleElementData = useCallback((item, setFormData) =>{
             onClick={handleGenrateCode}
 
             />
+
             <div className='row'>
                 <div className="col-lg-2 col-xlg-3 col-md-5" style={{background: "#fff", padding:'10px'}} ref={removeFromTeamRef}>
 

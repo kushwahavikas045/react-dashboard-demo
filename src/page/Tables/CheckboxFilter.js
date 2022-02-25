@@ -1,10 +1,11 @@
-import React from 'react'
+import React from 'react';
+import { handleEmpno, handledepartment, handlejoining, handlename, handletechnology } from '../../utils/TableData';
 const CheckboxFilter = ({
-    handleEmpno,
-    handlename,
-    handledepartment,
-    handlejoining,
-    handletechnology,
+    setEmpno,
+    setDepart,
+    setName,
+    setTechnology,
+    setJoin,
     name, empno, depart, join, technology
 }) => {
 
@@ -15,32 +16,32 @@ const CheckboxFilter = ({
                     <h4 className="card-title m-4">Hide or show (row)</h4>
                     <div className="card-body" style={{ display: 'flex', justityContent: 'center', flexWrap: 'wrap' }}>
 
-                        <div className="form-check" onClick={handleEmpno}>
-                            <input className="form-check-input" type="checkbox" checked={empno} />
+                        <div className="form-check" onClick={() =>handleEmpno(setEmpno, empno)}>
+                            <input className="form-check-input" type="checkbox" checked={empno} onChange={handleEmpno}/>
                             <label className="form-check-label">
                                 Emp no
                             </label>
                         </div>
-                        <div className="form-check" onClick={handlename}>
-                            <input className="form-check-input" name="name" type="checkbox" checked={name} />
+                        <div className="form-check" onClick={() => handlename(setName, name)}>
+                            <input className="form-check-input" name="name" type="checkbox" checked={name} onChange={handlename}/>
                             <label className="form-check-label">
                                 Name
                             </label>
                         </div>
-                        <div className="form-check" onClick={handledepartment}>
-                            <input className="form-check-input" name="department" type="checkbox" checked={depart} />
+                        <div className="form-check" onClick={() => handledepartment(setDepart, depart)}>
+                            <input className="form-check-input" name="department" type="checkbox" checked={depart}  onChange={handledepartment}/>
                             <label className="form-check-label">
                                 Department
                             </label>
                         </div>
-                        <div className="form-check" onClick={handletechnology}>
-                            <input className="form-check-input" name="technology" type="checkbox" checked={technology} />
+                        <div className="form-check" onClick={() =>handletechnology(setTechnology, technology)}>
+                            <input className="form-check-input" name="technology" type="checkbox" checked={technology} onChange={handletechnology}/>
                             <label className="form-check-label">
                                 Technology
                             </label>
                         </div>
-                        <div className="form-check" onClick={handlejoining}>
-                            <input className="form-check-input" name="joining" type="checkbox" checked={join} />
+                        <div className="form-check" onClick={() => handlejoining(setJoin, join)}>
+                            <input className="form-check-input" name="joining" type="checkbox" checked={join} onChange={handlejoining}/>
                             <label className="form-check-label">
                                 Joining
                             </label>

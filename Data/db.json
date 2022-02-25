@@ -1,14 +1,6 @@
 {
   "project": [
     {
-      "id": 2,
-      "month": "january",
-      "name": "Vinay jain",
-      "status": "Web Developer",
-      "project": "Drag and Drop",
-      "rate": "10.2"
-    },
-    {
       "id": 3,
       "month": "january",
       "name": "rajiv mandal",
@@ -55,6 +47,14 @@
       "rate": "16.2",
       "month": "march",
       "id": 8
+    },
+    {
+      "name": "Rohan yadav",
+      "status": "unit testing jest",
+      "project": "Admin dashboard",
+      "rate": "12.3",
+      "month": "march",
+      "id": 9
     }
   ]
 }

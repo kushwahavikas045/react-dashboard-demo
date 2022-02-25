@@ -12,7 +12,7 @@ const Breadcumb = ({ title, button, buttonTitle, onClick}) => {
       </div>
 
       {button ? (<div class="col-md-7 align-self-center">
-        <a class="btn waves-effect waves-light btn btn-info pull-right hidden-sm-down text-white"
+        <a className="btn waves-effect waves-light btn btn-info pull-right hidden-sm-down text-white"
         onClick={onClick}
         >{buttonTitle}</a>
       </div>) : ''}
