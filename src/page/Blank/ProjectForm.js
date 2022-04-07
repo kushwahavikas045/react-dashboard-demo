@@ -3,7 +3,7 @@ import { createProject } from '../../http/api';
 import { toast } from 'react-toastify';
 import ProjectFields from './ProjectFields';
 
-const ProjectForm = ({ fetchProject }) => {
+const ProjectForm = ({ fetchProject, Access }) => {
   const [months, setMonth] = useState('january');
   const [formdata, setFormData] = useState({
     name: '',
@@ -20,6 +20,9 @@ const ProjectForm = ({ fetchProject }) => {
 
   //handle formdata submit
   const handleSubmit = async () => {
+  if(Access){
+    toast.error('permission denied');
+  }else{
     setLoading(true);
     formdata['month'] = months;
     try {
@@ -33,6 +36,7 @@ const ProjectForm = ({ fetchProject }) => {
       setLoading(false);
       setFormData("");
     }
+  }
   }
 
   const { name, status, project, rate } = formdata;

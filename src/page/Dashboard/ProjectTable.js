@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import TableError from '../../components/TableError';
 import { Avatar, formateName } from '../../utils/formateName';
 import { deleteProject } from '../../http/api';
 import { toast } from 'react-toastify'
-const ProjectTable = ({ error, loading, project, fetchProject, update }) => {
+import AuthContext from '../../store/auth';
+import { deleteAccessPermission } from '../../utils/access';
+const ProjectTable = ({ error, loading, project, fetchProject, update, permission }) => {
     const [month, setMonth] = useState('january');
 
     //getMonth
@@ -14,17 +16,46 @@ const ProjectTable = ({ error, loading, project, fetchProject, update }) => {
     //filter month
     const data = project.filter((project) => project.month === month);
 
+    //get email from context api
+    const authCtx = useContext(AuthContext);
+    const {email} = authCtx;
+    const localStorageData = JSON.parse(localStorage.getItem('access'));
+    let deletePermission = false;
+    const Access = deleteAccessPermission(deletePermission, email, localStorageData);
     //delete project
     const handleDeleteProject = async (id) => {
         const result = window.confirm("Sure you went to Delete?");
-        if (result) {
+        if (result && !Access) {
            await deleteProject(id);
            toast.success('sucessfully delete your project');
             fetchProject();
+        }else{
+            toast.error('Permission denied');
         }
     }
-
-
+    const AccessData = () =>{
+        if(permission){
+            return <TableError title='No Read permission'/>
+        }else{
+            return data.map((project) => (
+                <tr key={project.id} style={{cursor:'pointer'}}>
+                    <td style={{ width: "50px" }}><span className={`${Avatar(project.name)}`}>{formateName(project.name)}</span></td>
+                    <td>
+                        <h6>{project.name}</h6><small className="text-muted">{project.status}</small>
+                    </td>
+                    <td>{project.project}</td>
+                    <td>${project.rate}
+                        <div>
+                            <div className="btn-group btn-group-sm" role="group" aria-label="...">
+                                <button type="button" className="btn btn-danger" onClick={() => handleDeleteProject(project.id)}><i className="fa fa-trash"></i></button>
+                                <button type="button" className="btn btn-warning" onClick={() => update(project.id)}><i className="fa fa-file"></i></button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            ))
+        }
+    }
 
     return (
         <div className="col-lg-8 d-flex align-items-stretch">
@@ -57,23 +88,7 @@ const ProjectTable = ({ error, loading, project, fetchProject, update }) => {
                             {data.length === 0 && !loading && !error && <TableError title={`No, Data Found In ${month}`} />}
                             {data.length !== 0 && !loading &&
                                 <tbody>
-                                    {data.map((project) => (
-                                        <tr key={project.id} style={{cursor:'pointer'}}>
-                                            <td style={{ width: "50px" }}><span className={`${Avatar(project.name)}`}>{formateName(project.name)}</span></td>
-                                            <td>
-                                                <h6>{project.name}</h6><small className="text-muted">{project.status}</small>
-                                            </td>
-                                            <td>{project.project}</td>
-                                            <td>${project.rate}
-                                                <div>
-                                                    <div className="btn-group btn-group-sm" role="group" aria-label="...">
-                                                        <button type="button" className="btn btn-danger" onClick={() => handleDeleteProject(project.id)}><i className="fa fa-trash"></i></button>
-                                                        <button type="button" className="btn btn-warning" onClick={() => update(project.id)}><i className="fa fa-file"></i></button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    ))}
+                                 {AccessData()}
                                 </tbody>
                             }
 

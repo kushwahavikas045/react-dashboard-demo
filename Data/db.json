@@ -9,36 +9,12 @@
       "rate": "10.5"
     },
     {
-      "id": 4,
-      "month": "january",
-      "name": "kalpesh mahale",
-      "status": "javascript",
-      "project": "Web RTC",
-      "rate": "10.2"
-    },
-    {
-      "id": 5,
-      "month": "february",
-      "name": "vahhab lakhani",
-      "status": "data scientist",
-      "project": "data mangement",
-      "rate": "5.9"
-    },
-    {
       "id": 6,
       "month": "march",
       "name": "vikas kushwaha",
       "status": "reactjs developer",
       "project": "admin wrap",
       "rate": "10"
-    },
-    {
-      "id": 7,
-      "month": "february",
-      "name": "Deepak kumar",
-      "status": "nodejs developer",
-      "project": "admin wrap backend",
-      "rate": "12.8"
     },
     {
       "name": "Mohit panchal",
@@ -55,6 +31,46 @@
       "rate": "12.3",
       "month": "march",
       "id": 9
+    },
+    {
+      "name": "vikas kushwaha",
+      "status": "Reactjs ",
+      "project": "aribnb",
+      "rate": "56.3",
+      "month": "april",
+      "id": 13
+    },
+    {
+      "name": "vikas kushwaha",
+      "status": "Reactjs ",
+      "project": "aribnb",
+      "rate": "56.3",
+      "month": "april",
+      "id": 14
+    },
+    {
+      "name": "vikas kushwaha",
+      "status": "Reactjs ",
+      "project": "update airbnb clone",
+      "rate": "12.6",
+      "month": "february",
+      "id": 15
+    },
+    {
+      "name": "vikas kushwaha",
+      "status": "Reactjs ",
+      "project": "update airbnb clone",
+      "rate": "12.6",
+      "month": "february",
+      "id": 16
+    },
+    {
+      "name": "vikas kushwaha",
+      "status": "nodejs",
+      "project": "dashboard testing",
+      "rate": "15.2",
+      "month": "march",
+      "id": 17
     }
   ]
 }

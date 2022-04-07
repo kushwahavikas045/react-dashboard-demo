@@ -42,4 +42,4 @@ const Feeds = () => {
   );
 };
 
-export default Feeds;
+export default React.memo(Feeds);

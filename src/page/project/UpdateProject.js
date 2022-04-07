@@ -1,6 +1,8 @@
-import React,{useEffect, useState} from 'react'
+import React,{useEffect, useState, useContext} from 'react'
 import { updateProjectById } from '../../http/api';
 import { toast } from 'react-toastify';
+import AuthContext from '../../store/auth';
+import { updateAccessPermission } from '../../utils/access';
 const UpdateProject = ({id, getProject, fetchProject}) => {
   const [months, setMonth] = useState('january');
   const [formdata, setFormData] = useState({
@@ -11,6 +13,13 @@ const UpdateProject = ({id, getProject, fetchProject}) => {
       month: getProject ? getProject.month : '',
   })
 
+  //get email from context api
+  const authCtx = useContext(AuthContext);
+  const{email} = authCtx;
+  let permission = false;
+  const localStorageData = JSON.parse(localStorage.getItem('access'));
+ const Access = updateAccessPermission(permission, email, localStorageData);
+
 
   //handle change in formdata
   const handleFormData = (e) => {
@@ -19,13 +28,17 @@ const UpdateProject = ({id, getProject, fetchProject}) => {
 
   //handle formdata submit
   const handleSubmit = async(id) => {
-      formdata['month'] = months;
+      if(Access){
+        toast.error('Permission denied');
+      }else{
+        formdata['month'] = months;
       try {
-        const data = await updateProjectById(id, formdata);
+         await updateProjectById(id, formdata);
         fetchProject();
         toast.success('project updated');
       } catch (error) {
         toast.error('something went wrong');
+      }
       }
   }
 
@@ -106,7 +119,6 @@ const UpdateProject = ({id, getProject, fetchProject}) => {
 
   return (
     form()
-
   )
 }
 

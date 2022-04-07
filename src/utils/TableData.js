@@ -17,14 +17,11 @@ if(namel == null){
         name: false
     }
 }
-
 if(departl == null){
     departl = {
         depart : false
     }
-
 }
-
 if(techl == null){
     techl = {
        tech : false
@@ -82,8 +79,7 @@ export const handlejoining = (setJoin, join) => {
 }
 
 //api call in table
-export const fetchTableData = async(setLoading, setDeveloper) =>{
-    setLoading(true);
+export const fetchTableData = async(setDeveloper) =>{
     const { data } = await axios.get('https://test-page-e48d7-default-rtdb.firebaseio.com/Developer.json');
     const developerArray = [];
     for (const key in data) {
@@ -95,27 +91,18 @@ export const fetchTableData = async(setLoading, setDeveloper) =>{
             joining: data[key].Joining
         })
     }
-    setLoading(false)
-    return setDeveloper(developerArray)
+    setDeveloper(developerArray);
 }
 
 //multiple filter option
 
-export const multipleFilter = (developer, joining, department, search) =>{
-    let filterData = developer;
-    if (joining === 'joining' && department === 'department' && search === '') {
-        filterData = developer;
-    }
-    if (joining !== 'joining') {
-        filterData = developer.filter((join) => join.joining == joining);
+export const multipleFilter = ({developer, joining, department, search}) =>{
+    return developer
+    // let filterData = developer;
+    // if (joining === 'joining' && department === 'department' && search === '') filterData = developer;
+    // if (joining !== 'joining') filterData = developer?.filter((join) => join.joining == joining);
+    // if (department !== 'department') filterData = developer?.filter((depart) => depart.department == department);
+    // if (search !== '') filterData = developer?.filter((dev) => dev.name.toLowerCase().includes(search))
+    // return filterData;
 
-    }
-    if (department !== 'department') {
-        filterData = developer.filter((depart) => depart.department == department);
-    }
-    if (search !== '') {
-        filterData = developer.filter((dev) => dev.name.toLowerCase().includes(search))
-    }
-
-    return filterData;
 }

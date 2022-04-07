@@ -4,7 +4,7 @@ const Element = ({item, elementType, onDropPlayer, index}) => {
 
     const [{ isDragging }, dragRef] = useDrag({
         type: elementType,
-        item: () => ({ ...item, index }),
+        item: () => ({ ...item, index, id : Math.floor(1000 + Math.random() * 9000)}),
         end: (item, monitor) => {
           const dropResult = monitor.getDropResult();
 

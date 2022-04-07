@@ -7,6 +7,7 @@ const ProfileCard = () => {
         <div className="card-body">
             <center className="mt-4"> <img src="/images/users/5.jpg" className="img-circle"
                     width="150" />
+                    
                 <h4 className="card-title mt-2">Hanna Gover</h4>
                 <h6 className="card-subtitle">Accoubts Manager Amix corp</h6>
                 <div className="row text-center justify-content-md-center">

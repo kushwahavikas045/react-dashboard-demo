@@ -1,7 +1,11 @@
 import React from 'react';
 
 const ProfileForm = () => {
-  return (
+
+    const handleCountry = () =>{
+
+    }
+    return (
     <div className="col-lg-8 col-xlg-9 col-md-7">
     <div className="card">
 
@@ -45,7 +49,7 @@ const ProfileForm = () => {
                 <div className="form-group">
                     <label className="col-sm-12">Select Country</label>
                     <div className="col-sm-12">
-                        <select  className="form-control form-control-line" Value={"london"}>
+                        <select  className="form-control form-control-line" value="london" onChange={handleCountry}>
                             <option>London</option>
                             <option>India</option>
                             <option>Usa</option>

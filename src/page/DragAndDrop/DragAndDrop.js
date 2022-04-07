@@ -50,6 +50,7 @@ const DragAndDrop = () => {
   }
   setElementType(object);
   setJsonArray((prev) => [...prev, object]);
+  console.log(item);
  }
 const result = JSON.stringify(jsonArray);
 console.log(result);
@@ -57,6 +58,7 @@ console.log(result);
 //remove from another container
  const removePlayerFromTeam = (item) =>{
     setContainer((prev) => prev.filter((_, i) => item.index !== i));
+    console.log(item)
  }
 
 //working on container for code genrate part ------------------>

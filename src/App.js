@@ -10,7 +10,9 @@ import JsonForm from './components/Element/JsonForm';
 import Signup from './page/Login/Signup';
 import AuthContext from './store/auth';
 
+
 function App() {
+
   //toggle state
   const [toggle, setToggle] = useState(false);
   //toggle function
@@ -25,12 +27,12 @@ function App() {
   const Dashboard = lazy(() => import("./page/Dashboard/Dashboard"));
   const Profile = lazy(() => import("./page/Profile/Profile"));
   const Tables = lazy(() => import("./page/Tables/Tables"));
-  const Icons = lazy(() => import("./page/Icons/Icons"));
-  const Map = lazy(() => import("./page/Map/Map"));
   const Blank = lazy(() => import("./page/Blank/Blank"));
   const PageNotFound = lazy(() => import("./components/PageNotFound"));
   const DragAndDrop = lazy(() => import("./page/DragAndDrop/DragAndDrop"));
   const Login = lazy(() => import('./page/Login/Login'));
+  const AccessUser = lazy(() => import("./page/Access/AccessUser"));
+
   const authCtx = useContext(AuthContext);
   const { isAuth } = authCtx;
 
@@ -57,11 +59,8 @@ function App() {
                   <ActivatedRoute exact path="/Tables">
                     <Tables />
                   </ActivatedRoute>
-                  <ProtectedRoute exact path="/Icons">
-                    <Icons />
-                  </ProtectedRoute>
-                  <ProtectedRoute exact path="/Map">
-                    <Map />
+                  <ProtectedRoute exact path="/Access">
+                    <AccessUser />
                   </ProtectedRoute>
                   <ProtectedRoute exact path="/Blank">
                     <Blank />
@@ -90,6 +89,7 @@ function App() {
           <Route exact path="/signup">
             <Signup />
           </Route>
+
           <Login />
         </Switch>
 
@@ -124,8 +124,20 @@ const ProtectedRoute = ({ children, ...rest }) => {
 
 const ActivatedRoute = ({ children, ...rest }) => {
   const authCtx = useContext(AuthContext);
-  const { isAuth } = authCtx;
-  const activated = false;
+  const { isAuth, email } = authCtx;
+  const localStorageData = JSON.parse(localStorage.getItem('access'));
+  const userData = localStorageData ? localStorageData.filter((storedData) => storedData.email === email) : [];
+  let activated = false;
+  if (userData.length > 0) {
+    userData.map((interData) => {
+      if (interData.activeted == true) {
+        activated = true
+      }
+    })
+  } else {
+    activated = true
+  }
+
   return (
     <Route
       {...rest}
@@ -153,5 +165,4 @@ const ActivatedRoute = ({ children, ...rest }) => {
   )
 
 }
-
 export default App;
